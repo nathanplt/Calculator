@@ -1,12 +1,15 @@
 html {
+  height: 100%;
   font-size: 100%;
 }
 
 body {
-  height: 50rem;
+  height: 100%;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: hsl(220, 40%, 80%);
 }
 
 .calculator {
@@ -14,8 +17,8 @@ body {
   width: 15rem;
   border: none;
   border-radius: 8px;
-  margin: auto auto;
   overflow: hidden;
+  box-shadow: 0 8px 20px hsla(0, 0%, 0%, 0.2);
 }
 
 .calc-viewport {
