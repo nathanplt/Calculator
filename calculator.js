@@ -54,6 +54,8 @@ function validOutput() {
 }
 
 function handleEnter() {
+  console.log(output);
+
   if (!validOutput()) {
     output = "Error";
     start = true;
@@ -68,12 +70,12 @@ function handleEnter() {
         pos++;
       }
 
-      if (currOp != "") {
-        if (currOp == "+") {
+      if (currOp !== "") {
+        if (currOp === "+") {
           answer += Number(currNum);
-        } else if (currOp == "-") {
+        } else if (currOp === "-") {
           answer -= Number(currNum);
-        } else if (currOp == "&times;") {
+        } else if (currOp === "&times;") {
           answer *= Number(currNum);
         } else {
           answer /= Number(currNum);
@@ -100,6 +102,28 @@ function handleEnter() {
   updateViewport();
 }
 
+function handleKeydown(event) {
+  const key = event.key;
+
+  if (key === "Enter") {
+    console.log("hi");
+    handleEnter();
+  } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+    if (key === "*") {
+      handleOperation("×");
+    } else if (key === "/") {
+      handleOperation("÷");
+    } else {
+      handleOperation(key);
+    }
+  } else if (/^[0-9]$/.test(key)) {
+    handleNumber(key);
+  } else if (key === "Backspace") {
+    output = output.substr(0, output.length - 1);
+    updateViewport();
+  }
+}
+
 document.querySelectorAll('.calc-key')
   .forEach((element) => {
     if (element.classList.contains('calc-enter')) {
@@ -110,3 +134,5 @@ document.querySelectorAll('.calc-key')
       element.addEventListener("click", () => handleNumber(element.innerHTML));
     }
   });
+
+document.body.addEventListener("keydown", (event) => handleKeydown(event));
