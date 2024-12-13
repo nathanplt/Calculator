@@ -22,6 +22,7 @@ function handleNumber(key) {
 }
 
 function handleOperation(key) {
+  start = false;
   output += ` ${key} `;
   updateViewport();
 }
@@ -88,6 +89,11 @@ function handleEnter() {
       currOp = output.substr(pos + 1, 1);
       pos += 3;
     }
+    
+    if (!Number.isInteger(answer)) {
+      answer = answer.toFixed(3);
+    }
+
     output = answer;
     start = true;
   }
