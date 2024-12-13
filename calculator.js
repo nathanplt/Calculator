@@ -106,7 +106,6 @@ function handleKeydown(event) {
   const key = event.key;
 
   if (key === "Enter") {
-    console.log("hi");
     handleEnter();
   } else if (key === "+" || key === "-" || key === "*" || key === "/") {
     if (key === "*") {
@@ -119,7 +118,16 @@ function handleKeydown(event) {
   } else if (/^[0-9]$/.test(key)) {
     handleNumber(key);
   } else if (key === "Backspace") {
-    output = output.substr(0, output.length - 1);
+    if (output.charAt(output.length - 1) == ' ') {
+      output = output.substr(0, output.length - 3);
+    } else {
+      output = output.substr(0, output.length - 1);
+    }
+    
+    if (output.length == 0) {
+      start = true;
+      output = "0";
+    }
     updateViewport();
   }
 }
